@@ -14,8 +14,8 @@
       <h1 class="hero-head">A personal<br><span class="hl-gold">dispatch</span><br>with the<br><span class="hl-blood">safety off.</span></h1>
       <p class="hero-dek">{{ with .Site.GetPage "/" }}{{ .Params.lede }}{{ end }}</p>
       <div class="hero-actions">
-        <a class="btn btn--gold" href="{{ "/dispatch/" | relURL }}">READ THE DISPATCHES</a>
-        <a class="btn btn--ghost" href="{{ "/about/" | relURL }}">WHO IS THIS</a>
+        <a class="btn btn--gold" href="{{ (site.GetPage "/dispatch").RelPermalink }}">READ THE DISPATCHES</a>
+        <a class="btn btn--ghost" href="{{ (site.GetPage "/about").RelPermalink }}">WHO IS THIS</a>
       </div>
     </div>
   </section>
@@ -26,7 +26,7 @@
   <section class="section">
     <div class="section-head">
       <h2 class="section-title">LATEST DISPATCHES</h2>
-      <a class="section-all mono-small" href="{{ "/dispatch/" | relURL }}">ALL →</a>
+      <a class="section-all mono-small" href="{{ (site.GetPage "/dispatch").RelPermalink }}">ALL →</a>
     </div>
 
     {{ $posts := where .Site.RegularPages "Section" "dispatch" }}

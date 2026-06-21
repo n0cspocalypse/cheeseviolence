@@ -15,7 +15,8 @@
   --dim:    #837E73;   /* muted / captions */
   --gold:   #C9A84C;   /* brand accent — structure, brand, links */
   --gold-2: #E4C76A;   /* gold highlight */
-  --blood:  #D4001A;   /* brand red — "violence", emphasis, tags */
+  --blood:  #D4001A;   /* brand red — fills, borders, large/decorative only */
+  --blood-text: #F0473A; /* AA-safe red for SMALL text (5.3:1 on void) */
   --rule:   #2A2722;   /* hairlines (warm dark) */
   --hole:   #3C372B;   /* cheese-hole ring (dim gold-grey) */
 
@@ -75,7 +76,7 @@ ul { list-style: none; }
 .mono-small { font-size: 11.5px; letter-spacing: .1em; color: var(--dim); text-transform: uppercase; }
 .eyebrow {
   font-family: var(--f-mono); font-size: 12.5px; letter-spacing: .22em;
-  text-transform: uppercase; color: var(--blood); font-weight: 700;
+  text-transform: uppercase; color: var(--blood-text); font-weight: 700;
 }
 .hl-gold { color: var(--gold); }
 .hl-blood { color: var(--blood); }
@@ -203,7 +204,7 @@ ul { list-style: none; }
 .btn--ghost:hover { background: var(--gold); color: var(--void); transform: translate(-2px,-2px); }
 
 /* ═══ SECTIONS / DISPATCH ROWS ════════════════════════════════════════ */
-.section { padding-block: 4px; }
+.section { padding-block: clamp(18px, 2vw, 28px); }
 .section-head {
   display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
   margin-bottom: 22px; border-bottom: 1px solid var(--rule); padding-bottom: 10px;
@@ -241,7 +242,7 @@ ul { list-style: none; }
 .row-link:hover .row-title { color: var(--gold); }
 .row-dek { grid-area: dek; color: var(--bone-2); max-width: 62ch; font-size: 15.5px; }
 .row-go {
-  grid-area: go; align-self: center; font-size: 12px; letter-spacing: .12em; color: var(--blood);
+  grid-area: go; align-self: center; font-size: 12px; letter-spacing: .12em; color: var(--blood-text);
   opacity: 0; transform: translateX(-6px); transition: opacity .18s, transform .18s; white-space: nowrap;
 }
 .row-link:hover .row-go { opacity: 1; transform: translateX(0); }
@@ -252,8 +253,8 @@ ul { list-style: none; }
   border: 1px solid var(--rule); padding: 3px 9px; transition: border-color .15s, color .15s;
 }
 .tag:hover { border-color: var(--gold); color: var(--gold); }
-.tag--cat { color: var(--blood); border-color: color-mix(in srgb, var(--blood) 50%, var(--rule)); font-weight: 700; }
-.tag--cat:hover { color: var(--void); background: var(--blood); border-color: var(--blood); }
+.tag--cat { color: var(--blood-text); border-color: color-mix(in srgb, var(--blood) 50%, var(--rule)); font-weight: 700; }
+.tag--cat:hover { color: var(--void); background: var(--blood-text); border-color: var(--blood-text); }
 
 /* ═══ THE DESKS (categories) ══════════════════════════════════════════ */
 .desks { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
@@ -303,10 +304,6 @@ ul { list-style: none; }
 .prose a:hover { color: var(--gold-2); border-bottom-color: var(--gold-2); }
 
 /* drop cap on the first paragraph */
-.prose--page + *, .prose > p:first-of-type::first-letter,
-.prose > p:first-child::first-letter {
-  /* fallback selector below targets the actual first para */
-}
 .prose > p:first-of-type::first-letter {
   font-family: var(--f-display); float: left; font-size: 4.4em; line-height: .72;
   padding: 6px 12px 0 0; color: var(--blood);
@@ -327,7 +324,7 @@ ul { list-style: none; }
 .prose ul li, .prose ol li { position: relative; padding-left: 28px; margin-top: .55em; color: var(--bone-2); }
 .prose ul li::before { content: ""; position: absolute; left: 2px; top: .58em; width: 10px; height: 10px; border: 2px solid var(--gold); border-radius: 50%; }
 .prose ol { counter-reset: cv; }
-.prose ol li::before { counter-increment: cv; content: counter(cv,decimal-leading-zero); position: absolute; left: 0; top: 0; font-family: var(--f-mono); font-size: 12px; color: var(--blood); font-weight: 700; }
+.prose ol li::before { counter-increment: cv; content: counter(cv,decimal-leading-zero); position: absolute; left: 0; top: 0; font-family: var(--f-mono); font-size: 12px; color: var(--blood-text); font-weight: 700; }
 
 .prose code { font-family: var(--f-mono); font-size: .86em; background: var(--panel); border: 1px solid var(--rule); padding: 1px 6px; color: var(--gold-2); }
 .prose pre { background: var(--panel); border: 1px solid var(--rule); border-left: 3px solid var(--gold); padding: 16px 18px; overflow-x: auto; font-size: 13.5px; }
@@ -386,7 +383,7 @@ ul { list-style: none; }
   .grain { display: none; }
 }
 @media print {
-  .grain, .masthead::before, .nav, .transmission, .hero-actions { display: none; }
+  .grain, .masthead::before, .nav, .transmission, .hero-actions, .hole-rule { display: none; }
   body { background: #fff; color: #000; }
   .prose a { color: #000; border: 0; }
 }

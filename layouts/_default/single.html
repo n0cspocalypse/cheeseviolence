@@ -5,7 +5,7 @@
     <div class="post-meta">
       {{ with .Params.dispatch_no }}<span class="row-no">{{ . }}</span>{{ end }}
       <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" | upper }}</time>
-      {{ with $cat }}<a class="tag tag--cat" href="{{ "/categories/" | relURL }}{{ . | urlize }}/">{{ . }}</a>{{ end }}
+      {{ range first 1 (.GetTerms "categories") }}<a class="tag tag--cat" href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }}
       <span class="mono-small">{{ .ReadingTime }} MIN</span>
     </div>
 
@@ -27,10 +27,10 @@
 
   <footer class="post-foot">
     <div class="hole-rule" aria-hidden="true"></div>
-    {{ with .Params.tags }}
+    {{ with .GetTerms "tags" }}
     <div class="post-tags">
       <span class="mono-label">// TAGS</span>
-      {{ range . }}<a class="tag" href="{{ "/tags/" | relURL }}{{ . | urlize }}/">{{ . }}</a>{{ end }}
+      {{ range . }}<a class="tag" href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end }}
     </div>
     {{ end }}
 
@@ -39,7 +39,7 @@
       {{ with .NextInSection }}<a class="post-nav-link post-nav-link--prev" href="{{ .RelPermalink }}"><span class="mono-small">OLDER ◂</span><span class="post-nav-title">{{ .Title }}</span></a>{{ end }}
     </nav>
 
-    <a class="back-link" href="{{ "/dispatch/" | relURL }}">← ALL DISPATCHES</a>
+    <a class="back-link" href="{{ (site.GetPage "/dispatch").RelPermalink }}">← ALL DISPATCHES</a>
   </footer>
 </article>
 {{ end }}
