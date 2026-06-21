@@ -1,0 +1,36 @@
+<footer class="transmission">
+  <div class="wrap">
+    <div class="hole-rule" aria-hidden="true"></div>
+
+    <div class="transmission-grid">
+      <div class="transmission-block">
+        <p class="mono-label">// TRANSMISSION</p>
+        <p class="transmission-brand">CHEESE&nbsp;VIOLENCE</p>
+        <p class="transmission-note">{{ .Site.Params.description }}</p>
+      </div>
+
+      <div class="transmission-block">
+        <p class="mono-label">// SECTIONS</p>
+        <ul class="transmission-links">
+          {{ range .Site.Menus.main }}<li><a href="{{ .URL | relURL }}">{{ .Name }}</a></li>{{ end }}
+          <li><a href="{{ "index.xml" | relURL }}">RSS / FEED</a></li>
+        </ul>
+      </div>
+
+      <div class="transmission-block">
+        <p class="mono-label">// SIGNAL</p>
+        <ul class="transmission-links">
+          {{ with .Site.Params.github }}<li><a href="{{ . }}" rel="me noopener">GITHUB</a></li>{{ end }}
+          {{ with .Site.Params.email }}<li><a href="mailto:{{ . }}">EMAIL</a></li>{{ end }}
+        </ul>
+        <p class="geo-stamp geo-stamp--foot">{{ .Site.Params.geo }}</p>
+      </div>
+    </div>
+
+    <div class="colophon-line">
+      <span class="mono-small">{{ .Site.Params.kicker }} · {{ .Site.Params.volume }}</span>
+      <span class="mono-small">© {{ now.Year }} {{ .Site.Params.author }} · ONE RUN. NO RESTOCK. 限定</span>
+      <span class="mono-small">EOF ▓</span>
+    </div>
+  </div>
+</footer>

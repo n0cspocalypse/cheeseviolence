@@ -1,0 +1,15 @@
+{{ define "main" }}
+<article class="post post--page">
+  <header class="page-head">
+    <p class="eyebrow">{{ .Params.eyebrow | default "DOSSIER" }}</p>
+    <h1 class="page-title">{{ .Title }}</h1>
+    {{ with .Params.dek }}<p class="post-dek">{{ . }}</p>{{ end }}
+  </header>
+
+  <div class="hole-rule" aria-hidden="true"></div>
+
+  <div class="prose prose--page">
+    {{ .Content }}
+  </div>
+</article>
+{{ end }}

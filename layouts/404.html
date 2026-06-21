@@ -1,0 +1,15 @@
+{{ define "main" }}
+<section class="page-head" style="text-align:center; padding-block: clamp(40px,10vw,120px);">
+  <p class="eyebrow">ERROR · 404 · NO SUCH TRANSMISSION</p>
+  <h1 class="page-title" style="font-size: clamp(64px,16vw,180px);">404</h1>
+  <p class="hero-dek" style="margin: 18px auto 28px; max-width: 44ch;">
+    This page took one to the cheese and didn't make it. The round you're looking for
+    isn't on this shelf — one run, no restock.
+  </p>
+  <div class="hero-actions" style="justify-content:center;">
+    <a class="btn btn--gold" href="{{ "/" | relURL }}">BACK TO THE FRONT</a>
+    <a class="btn btn--ghost" href="{{ "/dispatch/" | relURL }}">ALL DISPATCHES</a>
+  </div>
+</section>
+<div class="hole-rule" aria-hidden="true"></div>
+{{ end }}

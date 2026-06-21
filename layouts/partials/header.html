@@ -1,0 +1,27 @@
+<header class="masthead">
+  <div class="wrap masthead-inner">
+
+    <div class="masthead-top">
+      <span class="dateline">{{ .Site.Params.kicker }}</span>
+      <span class="dateline dateline-right">{{ .Site.Params.volume }} · {{ .Site.Params.est }}</span>
+    </div>
+
+    <a class="nameplate" href="{{ "/" | relURL }}" aria-label="{{ .Site.Title }} — home">
+      <span class="nameplate-word">CHEESE</span>
+      <span class="nameplate-word nameplate-word--cut">VIOLENCE</span>
+    </a>
+
+    <div class="masthead-bottom">
+      <span class="geo-stamp">{{ .Site.Params.geo }}</span>
+      <span class="holes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+    </div>
+
+    <nav class="nav" aria-label="Primary">
+      {{ $current := .RelPermalink }}
+      {{ range .Site.Menus.main }}
+        <a href="{{ .URL | relURL }}"{{ if or (eq $current (.URL | relURL)) (and (ne .URL "/") (hasPrefix $current (.URL | relURL))) }} aria-current="page"{{ end }}>{{ .Name }}</a>
+      {{ end }}
+    </nav>
+
+  </div>
+</header>

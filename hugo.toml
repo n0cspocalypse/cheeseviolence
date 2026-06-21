@@ -1,0 +1,69 @@
+# ─────────────────────────────────────────────────────────────────────────
+#  CHEESE VIOLENCE — personal dispatch
+#  Hugo config. baseURL is overridden at build time for GitHub Pages preview
+#  (the Action injects the project URL); the canonical target is the apex.
+# ─────────────────────────────────────────────────────────────────────────
+baseURL = "https://cheeseviolence.com/"
+languageCode = "en-us"
+title = "Cheese Violence"
+enableRobotsTXT = true
+enableGitInfo = false
+summaryLength = 30
+timeZone = "America/Los_Angeles"
+
+# Pretty, brand-flavored URLs: /dispatch/<slug>/
+[permalinks]
+  dispatch = "/dispatch/:slug/"
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[params]
+  brand = "CHEESE VIOLENCE"
+  kicker = "個人誌 · PERSONAL DISPATCH"
+  volume = "VOL. 002"
+  geo = "SAN FRANCISCO / LOS ANGELES / NOWHERE"
+  est = "EST. 2026"
+  description = "Field notes from the Cheese Violence universe — security, the homelab, brewing, decks, and things built with both hands. One run. No restock."
+  author = "N0CS"
+  mascot = "img/mascot-hero.jpg"
+  mascotAlt = "img/mascot-alt.jpg"
+  # Replace with your real handles when you're back; empty links are hidden.
+  github = "https://github.com/n0cspocalypse"
+  email = ""
+
+# Main navigation — labels name what they are, not how they're built.
+[menu]
+  [[menu.main]]
+    name = "DISPATCHES"
+    url = "/dispatch/"
+    weight = 10
+  [[menu.main]]
+    name = "DESKS"
+    url = "/categories/"
+    weight = 20
+  [[menu.main]]
+    name = "ABOUT"
+    url = "/about/"
+    weight = 30
+  [[menu.main]]
+    name = "COLOPHON"
+    url = "/colophon/"
+    weight = 40
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true          # allow inline HTML in posts (figures, mascot, etc.)
+  [markup.highlight]
+    noClasses = false      # use CSS classes so the theme controls code colors
+    lineNos = false
+    tabWidth = 2
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+[services]
+  [services.rss]
+    limit = 30

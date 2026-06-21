@@ -1,0 +1,37 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {{- $title := .Title -}}
+  {{- $isHome := .IsHome -}}
+  {{- $pageTitle := cond $isHome (printf "%s — %s" .Site.Title .Site.Params.kicker) (printf "%s — %s" $title .Site.Title) -}}
+  <title>{{ $pageTitle }}</title>
+
+  {{- $desc := or .Description .Summary .Site.Params.description -}}
+  {{- $desc = $desc | plainify | chomp -}}
+  <meta name="description" content="{{ $desc }}">
+  <meta name="author" content="{{ .Site.Params.author }}">
+
+  <link rel="canonical" href="{{ .Permalink }}">
+  {{ with .OutputFormats.Get "RSS" }}<link rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" href="{{ .RelPermalink }}">{{ end }}
+
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="{{ cond $isHome "website" "article" }}">
+  <meta property="og:title" content="{{ cond $isHome (printf "%s — %s" .Site.Title .Site.Params.volume) $title }}">
+  <meta property="og:description" content="{{ $desc }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:site_name" content="{{ .Site.Title }}">
+  {{- $ogimg := .Params.image | default .Site.Params.mascot -}}
+  {{- with $ogimg }}<meta property="og:image" content="{{ . | absURL }}">{{ end }}
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Brand type: Bebas Neue (masthead) · Inter (body) · Space Mono (utility) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
+
+  <meta name="theme-color" content="#0B0B0C">
+  <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
+</head>

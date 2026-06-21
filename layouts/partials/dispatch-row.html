@@ -1,0 +1,14 @@
+{{/* A single dispatch in the index list. Receives a Page (.). */}}
+{{ $cat := "" }}{{ with .Params.categories }}{{ $cat = index . 0 }}{{ end }}
+<article class="row">
+  <a class="row-link" href="{{ .RelPermalink }}">
+    <div class="row-meta">
+      <span class="row-no">{{ .Params.dispatch_no | default (printf "№%02d" (add 1 .Weight)) }}</span>
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time>
+      {{ with $cat }}<span class="tag tag--cat">{{ . }}</span>{{ end }}
+    </div>
+    <h2 class="row-title">{{ .Title }}</h2>
+    {{ with .Params.dek }}<p class="row-dek">{{ . }}</p>{{ else }}<p class="row-dek">{{ .Summary | plainify | truncate 150 }}</p>{{ end }}
+    <span class="row-go" aria-hidden="true">READ ▸</span>
+  </a>
+</article>

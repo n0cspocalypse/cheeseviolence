@@ -1,0 +1,35 @@
+{{ define "main" }}
+  <header class="page-head">
+    {{ $kicker := "DISPATCH INDEX" }}
+    {{ if eq .Kind "term" }}{{ $kicker = printf "DESK · %s" (.Data.Plural | upper) }}{{ end }}
+    {{ if eq .Kind "taxonomy" }}{{ $kicker = "ALL DESKS" }}{{ end }}
+    <p class="eyebrow">{{ $kicker }}</p>
+    <h1 class="page-title">{{ .Title }}</h1>
+    {{ with .Content }}<div class="page-intro prose">{{ . }}</div>{{ end }}
+    {{ if eq .Kind "term" }}
+      <p class="page-count mono-small">{{ len .Pages }} DISPATCH{{ if ne (len .Pages) 1 }}ES{{ end }} ON THIS DESK</p>
+    {{ end }}
+  </header>
+
+  <div class="hole-rule" aria-hidden="true"></div>
+
+  {{ if eq .Kind "taxonomy" }}
+    {{/* List the desks themselves */}}
+    <div class="desks desks--wide">
+      {{ range .Data.Terms.ByCount }}
+        <a class="desk" href="{{ .Page.RelPermalink }}">
+          <span class="desk-name">{{ .Page.Title }}</span>
+          <span class="desk-count mono-small">{{ .Count }} FILED</span>
+        </a>
+      {{ end }}
+    </div>
+  {{ else }}
+    {{ $pages := .Pages.ByDate.Reverse }}
+    <div class="rows">
+      {{ range $pages }}
+        {{ partial "dispatch-row.html" . }}
+      {{ end }}
+    </div>
+    {{ if not $pages }}<p class="empty">Nothing filed here yet.</p>{{ end }}
+  {{ end }}
+{{ end }}
